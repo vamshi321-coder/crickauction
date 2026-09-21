@@ -1,183 +1,221 @@
-<div align="center">
-  <img src="./public/readme-assets/ipl-logo.png" width="120" height="120" alt="IPL Auction Logo">
+# 🏏 CrickAuction
 
-  # 🏏 IPL Mega Auction & Fantasy Arena
-  ### *The Ultimate Real-Time SaaS Auction & Live Fantasy Experience*
+> A real-time multiplayer IPL-style cricket auction simulator — play with friends and intelligent franchise bots.
 
-  [![React](https://img.shields.io/badge/React-19.2-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://reactjs.org/)
-  [![Vite](https://img.shields.io/badge/Vite-6.0-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
-  [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-v4.0-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
-  [![Firebase](https://img.shields.io/badge/Firebase-12.11-FFCA28?style=for-the-badge&logo=firebase&logoColor=black)](https://firebase.google.com/)
-  [![CricAPI](https://img.shields.io/badge/CricAPI-Integration-red?style=for-the-badge&logo=cricket&logoColor=white)](https://cricapi.com/)
-
-  <p align="center">
-    <b>A high-performance, real-time multiplayer simulation platform designed to replicate the intensity of the official IPL auction combined with an interactive Fantasy Arena powered by real-world match scorecards.</b>
-    <br />
-    <a href="#-key-features">Key Features</a> •
-    <a href="#-tech-stack">Tech Stack</a> •
-    <a href="#-project-structure">Project Structure</a> •
-    <a href="#-getting-started">Getting Started</a> •
-    <a href="#-automation-scripts">Automation Scripts</a>
-  </p>
-</div>
+**Modified by Vamshi Nakkala** | Original by Shaurya Upadhyay
 
 ---
 
-## ✨ Key Features
+## 🚀 Live Demo
 
-<table align="center" width="100%">
-  <tr>
-    <td width="50%" valign="top">
-      <h3>🏢 Real-Time Auction Engine</h3>
-      <ul>
-        <li><b>Firebase Sync:</b> Sub-second latency powered by Firebase Realtime Database.</li>
-        <li><b>Universal Clock Offset:</b> Automated synchronization of bid timers across all client machines using RTDB offset.</li>
-        <li><b>Flexible Auction Formats:</b>
-          <ul>
-            <li><b>Mega:</b> 25 squad limit, 8 overseas limit, 120 Cr budget.</li>
-            <li><b>Sprint 11:</b> 11 squad limit, 4 overseas limit, 90 Cr budget.</li>
-            <li><b>Sprint 5:</b> 5 squad limit, 2 overseas limit, 60 Cr budget.</li>
-          </ul>
-        </li>
-      </ul>
-    </td>
-    <td width="50%" valign="top">
-      <h3>🏆 Fantasy Arena</h3>
-      <ul>
-        <li><b>Squad Selection:</b> Draft your Playing XI, select a Captain (2x points), Vice-Captain (1.5x points), and Impact Player from your auction acquisitions.</li>
-        <li><b>Real-time Leaderboard:</b> Ranks players based on actual match scores.</li>
-        <li><b>Admin Console:</b> Dedicated interface for administrators to manage rooms and sync stats.</li>
-      </ul>
-    </td>
-  </tr>
-  <tr>
-    <td width="50%" valign="top">
-      <h3>📺 Premium Broadcast UI/UX</h3>
-      <ul>
-        <li><b>Sophisticated Design:</b> Sleek dark mode styling using Tailwind CSS v4 and glassmorphism.</li>
-        <li><b>Micro-Animations:</b> Smoothed with Framer Motion, including confetti and animated "SOLD"/"UNSOLD" cards.</li>
-        <li><b>Interactive Lobby:</b> Features team assignment tools, live chat, and kick/ban controls.</li>
-      </ul>
-    </td>
-    <td width="50%" valign="top">
-      <h3>🔌 CricAPI Live Scorecard Sync</h3>
-      <ul>
-        <li><b>CricAPI Integration:</b> Automated fetchers pull real scorecard stats.</li>
-        <li><b>Automatic Point Calculator:</b> Converts runs, wickets, catches, and strike rates into fantasy points.</li>
-        <li><b>Backfill Tools:</b> Scripts to seed and update database with historical IPL data.</li>
-      </ul>
-    </td>
-  </tr>
-</table>
+🌐 [cricketauction3.vercel.app](https://cricketauction3.vercel.app)
 
 ---
 
-## 🛠 Tech Stack
+## 🎮 What Is This?
 
-- **Frontend Core:** `React 19.2` + `Vite 6` (Ultra-fast Hot Module Replacement)
-- **Styling:** `Tailwind CSS v4` + `Framer Motion` (Smooth animations)
-- **Backend & Database:** `Firebase` (Authentication, Cloud Firestore, Realtime Database)
-- **Live Stats Integration:** `CricAPI` (Match data and real-world scoreboard points)
-- **Icons & Utilities:** `Lucide React`, `Canvas Confetti`, `html-to-image`
-- **Future Integrations:** Prepared for `@google/generative-ai` (Gemini API) and Agora Voice Chat.
+CrickAuction is a multiplayer browser-based IPL auction simulator where:
+- Up to 10 teams can join a live auction room
+- A host controls the auction flow
+- Participants bid on real IPL players in real time
+- Empty team slots are filled by intelligent franchise owner bots
+- After the auction, teams can play Fantasy XI and simulate Dream Matches
 
----
-
-## 📂 Project Structure
-
-```
-ipl-auction/
-├── public/                 # Static assets, sitemaps, robots.txt
-├── scripts/                # Database and data synchronization scripts
-│   ├── autoUpdateFantasy.js      # Auto-calculates points from live CricAPI matches
-│   ├── backfillIPL2026.js        # Imports IPL series scorecards
-│   ├── deployDatabaseRules.js    # Syncs rules to Firebase RTDB
-│   └── uploadConsolidatedPoints.js
-├── src/
-│   ├── components/         # Reusable widgets (Activity feed, Chat, Footer, etc.)
-│   │   └── fantasy/        # Fantasy team editor and squad preview components
-│   ├── contexts/           # State management (Auction and Authentication)
-│   ├── data/               # Seed data (Players list, franchises details)
-│   ├── lib/                # Firebase connection helpers and config
-│   ├── pages/              # Main routing pages
-│   │   ├── AuctionRoom.jsx       # Interactive bidding screen
-│   │   ├── AuctionSummary.jsx    # Post-auction summary and Fantasy Arena
-│   │   ├── FantasyAdmin.jsx      # Admin panel for score calculations
-│   │   ├── LandingPage.jsx       # Franchise marquee & Room selector
-│   │   └── Lobby.jsx             # Pre-auction franchise lobby
-│   ├── App.jsx             # Router and layout definitions
-│   └── main.jsx            # React root mount
-├── database.rules.json     # Firebase Realtime Database Security Rules
-├── vite.config.js          # Vite config using `@tailwindcss/vite`
-└── package.json            # Dependencies and npm script shortcuts
-```
+Built with **React + Firebase Realtime Database** for true multiplayer synchronization.
 
 ---
 
-## 🚀 Getting Started
+## ✨ Features
+
+### 🏟️ Live Multiplayer Auction
+- Real-time bidding synced across all devices via Firebase RTDB
+- Host controls: Start, Pause, Resume, Next Player, SOLD/UNSOLD
+- Countdown timer with 4-second warning sound
+- Team songs play on SOLD for all connected participants
+- Sound ON/OFF toggle per participant
+- Player card flip reveal animation when a new player enters
+- Set announcement banner (Marquee Set 1 → Set 1 → Set 2...)
+- Players randomized within each set — set order stays fixed
+
+### 🤖 Realistic Franchise Bot Engine (v6.7)
+- Empty team slots are automatically controlled by franchise owner bots
+- **10 unique franchise personalities** — each based on real IPL owners:
+  - Mukesh Ambani (MI) — Aggressive spender
+  - Virat Kohli XI (RCB) — Star hunter, chases elite batsmen
+  - Shah Rukh Khan (KKR) — Unpredictable, dramatic bids
+  - N. Srinivasan (CSK) — Balanced, prefers experienced players
+  - Parth Jindal (DC) — Data-driven, never overpays
+  - Preity Zinta (PBKS) — Squad-need driven
+  - Manoj Badale (RR) — Value hunter, buys at discount
+  - Kalanithi Maran (SRH) — Aggressive on bowlers
+  - CVC Capital (GT) — Balanced conservative
+  - Sanjiv Goenka (LSG) — Squad-need driven
+- **Dynamic per-player valuation** — each bot calculates a unique max price per player based on:
+  - Player quality rating (from real stats)
+  - Role priority per franchise
+  - Squad gaps and role needs
+  - Remaining purse and budget management
+  - Future player planning (looks ahead 40 players)
+  - Name/player affinity (RCB bids harder on Kohli-type players)
+  - Experience preference
+  - Personality-based random variance
+- **Banded price tiers** — realistic IPL price distribution:
+  - Elite players (Kohli, Bumrah level) → ₹15–22 Cr
+  - Quality players → ₹7–15 Cr
+  - Good players → ₹3–7 Cr
+  - Average players → ₹1.2–3 Cr
+  - Backups/uncapped → ₹0.3–1 Cr
+- Bots wait 3–10 seconds before bidding (feels human)
+- Bot engine restarts automatically if host refreshes mid-auction
+
+### 🏆 Fantasy Section
+- **Best Team** — rates your complete auction squad using real player stats
+- **Select Play XI** — pick your playing 11 from your squad, assign Captain & Vice-Captain
+- **Leaderboard** — ranks all participants by their Play XI rating (no manual points needed)
+- Rating engine is role-aware: batsmen rated on runs/avg/SR, bowlers on wickets/economy
+
+### 📊 Compare Teams
+- Side-by-side squad comparison for any two teams
+- Shows: player count, squad rating, total spent, overseas count, role breakdown
+- Full player list with photos and bid prices
+
+### 🏏 Dream Match Simulator
+- Simulate T20 or ODI matches between any two squads
+- Over-by-over run chart, top scorer, top bowler
+- Full batting and bowling scorecards
+- Seeded random — same matchup gives consistent results
+- Quick matchup shortcuts for all possible team combinations
+
+### 🎯 Bid Prediction Mini-Game
+- Before each player's auction, predict the final sold price
+- After SOLD, closest prediction is revealed with rankings
+- Synced across all participants in the room via Firebase
+
+### 📖 Onboarding Guide
+- Step-by-step coach-mark tour appears after auction starts
+- Highlights real UI elements with spotlight and arrow tooltip
+- Skippable, remembers completion per device
+
+---
+
+## 🛠️ Tech Stack
+
+| Layer | Technology |
+|---|---|
+| Frontend | React 19 + Vite |
+| Styling | Tailwind CSS |
+| Animations | Framer Motion |
+| 3D / Visual | Three.js (canvas-confetti for effects) |
+| Database | Firebase Realtime Database |
+| Auth | Firebase Anonymous Auth |
+| Deployment | Vercel |
+| Icons | Lucide React |
+
+---
+
+## ⚙️ Setup & Running Locally
 
 ### Prerequisites
-- Node.js (v18+)
-- Firebase account and setup project
-- CricAPI key (optional, required to run point synchronizer scripts)
+- Node.js 18+
+- A Firebase project (free Spark plan works)
 
-### Installation
+### 1. Clone the repo
+```bash
+git clone https://github.com/vamshi321-coder/crickauction.git
+cd crickauction/ipl-auction-main
+```
 
-1. **Clone the Repository & Install Dependencies**
-   ```bash
-   git clone https://github.com/Shaurya01836/ipl-auction.git
-   cd ipl-auction
-   npm install
-   ```
+### 2. Install dependencies
+```bash
+npm install
+```
 
-2. **Configure Environment Variables**
-   Create a `.env` file in the root of the project:
-   ```env
-   VITE_FIREBASE_API_KEY=your_firebase_api_key
-   VITE_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
-   VITE_FIREBASE_DATABASE_URL=https://your_project-default-rtdb.firebaseio.com
-   VITE_FIREBASE_PROJECT_ID=your_project_id
-   VITE_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
-   VITE_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
-   VITE_FIREBASE_APP_ID=your_app_id
-   VITE_FIREBASE_MEASUREMENT_ID=your_measurement_id
-   
-   # Optional: Administrative and Integration keys
-   VITE_ADMIN_EMAIL=your_admin_email_to_access_fantasy_admin
-   VITE_CRICKET_API_KEY=your_cricapi_key
-   VITE_GEMINI_API_KEY=your_gemini_api_key
-   ```
+### 3. Create `.env` file
+Copy `.env.example` to `.env` and fill in your Firebase config:
+```env
+VITE_FIREBASE_API_KEY=your_api_key
+VITE_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+VITE_FIREBASE_DATABASE_URL=https://your_project-default-rtdb.region.firebasedatabase.app
+VITE_FIREBASE_PROJECT_ID=your_project_id
+VITE_FIREBASE_STORAGE_BUCKET=your_project.firebasestorage.app
+VITE_FIREBASE_MESSAGING_SENDER_ID=your_sender_id
+VITE_FIREBASE_APP_ID=your_app_id
+```
 
-3. **Start the Development Server**
-   ```bash
-   npm run dev
-   ```
+### 4. Firebase setup required
+In your Firebase console, enable:
+- **Authentication** → Anonymous sign-in
+- **Firestore Database** → Start in test mode
+- **Realtime Database** → Start in test mode
 
----
-
-## ⚙️ Automation Scripts
-
-The project includes CLI utilities inside the `scripts/` directory to manage database configuration and sync fantasy points:
-
-* **Sync Realtime Database Rules**
-  Updates rules on Firebase to secure bidding operations:
-  ```bash
-  node scripts/deployDatabaseRules.js
-  ```
-* **Backfill Match scorecards**
-  Fetches IPL matches and player points from CricAPI and registers them inside Firestore:
-  ```bash
-  node scripts/backfillIPL2026.js
-  ```
-* **Auto-Update Live Scores**
-  Processes current live scorecards to update the global fantasy leaderboard:
-  ```bash
-  node scripts/autoUpdateFantasy.js
-  ```
+### 5. Run locally
+```bash
+npm run dev
+```
+Open `http://localhost:5173`
 
 ---
 
-<div align="center">
-  <p>Built for Cricket Fans • Designed for Pro Experience</p>
-  <p>© IPL Auction Simulation Platform</p>
-</div>
+## 🎯 How to Play
+
+1. Open the site and create an auction room
+2. Share the room code with friends
+3. Each friend picks an IPL franchise
+4. Empty team slots become intelligent bots (franchise owner personalities)
+5. Host clicks **Start Auction** — players come up set by set
+6. Bid on players before the timer runs out
+7. After auction ends, pick your **Fantasy XI** and simulate **Dream Matches**
+
+---
+
+## 📁 Project Structure
+
+```
+src/
+├── components/
+│   ├── fantasy/          # Best Team, Play XI, Leaderboard
+│   ├── BidPrediction.jsx # Prediction mini-game
+│   ├── DreamMatch.jsx    # Match simulator UI
+│   ├── OnboardingGuide.jsx # Coach-mark tour
+│   └── TextChat.jsx      # In-room chat
+├── contexts/
+│   └── AuctionContext.jsx # All Firebase sync + bot engine wiring
+├── data/
+│   ├── players.js        # 523 IPL players with stats
+│   └── teams.js          # 10 IPL franchises
+├── lib/
+│   ├── botEngine.js      # Franchise bot AI engine
+│   ├── matchSimulator.js # T20/ODI match simulation
+│   ├── playerRating.js   # Role-aware player rating system
+│   └── firebase.js       # Firebase config
+└── pages/
+    ├── AuctionRoom.jsx   # Main auction UI
+    ├── AuctionSummary.jsx # Post-auction tabs
+    ├── LandingPage.jsx   # Home page
+    └── Lobby.jsx         # Pre-auction lobby
+```
+
+---
+
+## 🔒 Privacy
+
+This project is for **personal use between friends only**.
+- Not publicly listed or indexed
+- No monetization
+- IPL player data used for educational/entertainment purposes only
+
+---
+
+## 📝 Version History
+
+| Version | What Changed |
+|---|---|
+| v1 | Initial project (Shaurya Upadhyay) |
+| v2 | Firebase integration, .env setup, basic auction working |
+| v3 | Best Team rating, Leaderboard, Squad Comparison, Player card flip animation, Set announcements |
+| v4 | Audio ON/OFF toggle, set-wise player randomization, Modified by footer |
+| v5 | TTS/voice removed, Dream Match simulator, Bid Prediction, Onboarding guide |
+| v6 | Franchise bot engine — 10 personalities, Firebase transactions, host refresh fix |
+| v6.3 | Countdown timer sound at 4 seconds |
+| v6.6 | Full dynamic valuation engine — banded pricing, future planning, squad need |
+| v6.7 | Realistic price tiers, scaled bid increments, improved name affinities |
