@@ -634,7 +634,35 @@ export const AuctionProvider = ({ children }) => {
       checkAndSet();
 
       // Bot engine — only runs on host's browser
-      if (botEngineRef.current && snapshot.val()) {
+      // If host refreshed mid-auction, restart the bot engine automatically
+      if (snapshot.val()?.status === 'bidding' && userId === currentRoomData?.hostId) {
+        if (!botEngineRef.current) {
+          // Host reconnected — restart bot engine silently
+          try {
+            const budget = currentRoomData?.settings?.budget || 120;
+            const engine = new BotEngine(auctionId, getSyncedTime, budget);
+            const occupiedTeams = (currentRoomData?.players || []).map(p => p.team).filter(Boolean);
+            const allTeamIds = TEAMS.map(t => t.id);
+            engine.registerBots(
+              occupiedTeams.map(tid => ({ teamId: tid })),
+              allTeamIds
+            );
+            // Restore player order for future planning
+            const savedOrder = currentRoomData?.playerOrder;
+            if (savedOrder) engine.setPlayerOrder(savedOrder);
+            botEngineRef.current = engine;
+          } catch (e) {
+            console.warn('Bot engine restart failed (non-critical):', e?.message);
+          }
+        }
+        if (botEngineRef.current) {
+          // Sync bot budgets from teams data before processing live state
+          if (currentRtdbData) {
+            const teamsSnap = currentRtdbData;
+          }
+          botEngineRef.current.onLiveState(snapshot.val(), currentRoomData?.settings);
+        }
+      } else if (botEngineRef.current && snapshot.val()) {
         botEngineRef.current.onLiveState(snapshot.val(), currentAuction?.settings);
       }
     }, (error) => {
@@ -652,6 +680,11 @@ export const AuctionProvider = ({ children }) => {
         // Keep bot state in sync with real team budgets/squads
         if (botEngineRef.current) {
           botEngineRef.current.syncBotState(teamsObj);
+        } else if (userId === currentRoomData?.hostId && currentRoomData?.status === 'active') {
+          // Teams arrived before bot engine restarted — store for sync after restart
+          setTimeout(() => {
+            if (botEngineRef.current) botEngineRef.current.syncBotState(teamsObj);
+          }, 2000);
         }
 
         if (userId) {
