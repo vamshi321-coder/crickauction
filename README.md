@@ -37,36 +37,12 @@ Built with **React + Firebase Realtime Database** for true multiplayer synchroni
 - Set announcement banner (Marquee Set 1 → Set 1 → Set 2...)
 - Players randomized within each set — set order stays fixed
 
-### 🤖 Realistic Franchise Bot Engine (v6.7)
-- Empty team slots are automatically controlled by franchise owner bots
-- **10 unique franchise personalities** — each based on real IPL owners:
-  - Mukesh Ambani (MI) — Aggressive spender
-  - Virat Kohli XI (RCB) — Star hunter, chases elite batsmen
-  - Shah Rukh Khan (KKR) — Unpredictable, dramatic bids
-  - N. Srinivasan (CSK) — Balanced, prefers experienced players
-  - Parth Jindal (DC) — Data-driven, never overpays
-  - Preity Zinta (PBKS) — Squad-need driven
-  - Manoj Badale (RR) — Value hunter, buys at discount
-  - Kalanithi Maran (SRH) — Aggressive on bowlers
-  - CVC Capital (GT) — Balanced conservative
-  - Sanjiv Goenka (LSG) — Squad-need driven
-- **Dynamic per-player valuation** — each bot calculates a unique max price per player based on:
-  - Player quality rating (from real stats)
-  - Role priority per franchise
-  - Squad gaps and role needs
-  - Remaining purse and budget management
-  - Future player planning (looks ahead 40 players)
-  - Name/player affinity (RCB bids harder on Kohli-type players)
-  - Experience preference
-  - Personality-based random variance
-- **Banded price tiers** — realistic IPL price distribution:
-  - Elite players (Kohli, Bumrah level) → ₹15–22 Cr
-  - Quality players → ₹7–15 Cr
-  - Good players → ₹3–7 Cr
-  - Average players → ₹1.2–3 Cr
-  - Backups/uncapped → ₹0.3–1 Cr
-- Bots wait 3–10 seconds before bidding (feels human)
-- Bot engine restarts automatically if host refreshes mid-auction
+### 🤖 Intelligent Bot Engine
+- Empty team slots are automatically filled by AI-controlled teams
+- Each bot franchise has a unique bidding personality and strategy
+- Dynamic per-player valuation based on player quality, role need, squad gaps, remaining budget, and future planning
+- Realistic price tiers — only elite players reach high prices, average players sell cheaply
+- Bots wait realistically before bidding, never feel robotic
 
 ### 🏆 Fantasy Section
 - **Best Team** — rates your complete auction squad using real player stats
@@ -210,12 +186,9 @@ This project is for **personal use between friends only**.
 
 | Version | What Changed |
 |---|---|
-| v1 | Initial project (Shaurya Upadhyay) |
-| v2 | Firebase integration, .env setup, basic auction working |
-| v3 | Best Team rating, Leaderboard, Squad Comparison, Player card flip animation, Set announcements |
-| v4 | Audio ON/OFF toggle, set-wise player randomization, Modified by footer |
-| v5 | TTS/voice removed, Dream Match simulator, Bid Prediction, Onboarding guide |
-| v6 | Franchise bot engine — 10 personalities, Firebase transactions, host refresh fix |
-| v6.3 | Countdown timer sound at 4 seconds |
-| v6.6 | Full dynamic valuation engine — banded pricing, future planning, squad need |
-| v6.7 | Realistic price tiers, scaled bid increments, improved name affinities |
+| v1 | Initial project by Shaurya Upadhyay |
+| v2 | Firebase setup, auction working locally |
+| v3 | Fantasy section, squad comparison, card animations |
+| v4 | Audio toggle, set-wise randomization, footer credit |
+| v5 | Voice removed, Dream Match, Bid Prediction, Onboarding |
+| v6+ | Bot engine, dynamic pricing, countdown sound, bug fixes |
